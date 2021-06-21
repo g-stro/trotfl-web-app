@@ -10,12 +10,11 @@ import org.springframework.stereotype.Service;
  * @author Greg Stroud
  */
 @Service
-@Profile("springdatajpa")
-public class UserDataJpa implements UserService {
+public class UserJpaService implements UserService {
 
     private final UserRepository userRepository;
 
-    public UserDataJpa(UserRepository userRepository) {
+    public UserJpaService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
