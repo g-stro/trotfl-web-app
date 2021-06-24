@@ -1,6 +1,6 @@
 package com.trotfl.trotflwebapp.service;
 
-import com.trotfl.trotflwebapp.model.User;
+import com.trotfl.trotflwebapp.domain.security.User;
 
 /**
  * @author Greg Stroud
