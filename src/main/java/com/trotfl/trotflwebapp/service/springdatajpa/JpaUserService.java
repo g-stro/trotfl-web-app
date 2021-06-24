@@ -1,20 +1,19 @@
 package com.trotfl.trotflwebapp.service.springdatajpa;
 
-import com.trotfl.trotflwebapp.model.User;
-import com.trotfl.trotflwebapp.repository.UserRepository;
+import com.trotfl.trotflwebapp.domain.security.User;
+import com.trotfl.trotflwebapp.repository.security.UserRepository;
 import com.trotfl.trotflwebapp.service.UserService;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Greg Stroud
  */
 @Service
-public class UserJpaService implements UserService {
+public class JpaUserService implements UserService {
 
     private final UserRepository userRepository;
 
-    public UserJpaService(UserRepository userRepository) {
+    public JpaUserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

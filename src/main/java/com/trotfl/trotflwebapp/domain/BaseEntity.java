@@ -1,4 +1,4 @@
-package com.trotfl.trotflwebapp.model;
+package com.trotfl.trotflwebapp.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
