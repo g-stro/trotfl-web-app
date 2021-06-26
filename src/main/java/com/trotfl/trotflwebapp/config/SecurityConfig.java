@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] HTTP_ANT_MATCHERS = {
             "/h2-console/**",
+            "/",
             "/login",
             "/webjars/**"
     };
