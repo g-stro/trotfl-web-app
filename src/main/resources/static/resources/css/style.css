@@ -1,0 +1,11 @@
+html, body {
+    height: 100%;
+}
+
+.form-group {
+  margin: 1em;
+}
+
+.links a {
+  margin-left: 4px;
+}

@@ -19,6 +19,7 @@ public class User extends BaseEntity {
 
     private String username;
     private String password;
+    private String email;
 
     @Singular
     @ManyToMany(cascade = CascadeType.MERGE)
