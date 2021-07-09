@@ -25,7 +25,8 @@ public class AccountController {
 
     @GetMapping("/accountManagement")
     public String userAccount(Model model) {
-        model.addAttribute(User.builder().build());
+        User user = userService.findByUsername("admin");
+        model.addAttribute("user", user);
         return "account/accountManagement";
     }
 

@@ -2,8 +2,11 @@ package com.trotfl.trotflwebapp.domain.security;
 
 import com.trotfl.trotflwebapp.domain.BaseEntity;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -15,6 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class User extends BaseEntity {
 
     private String username;
@@ -40,4 +44,10 @@ public class User extends BaseEntity {
     @Builder.Default
     private Boolean credentialsNonExpired = true;
 
+    // TODO update this at login authorisation
+    private LocalDateTime lastLogin;
+
+    @Column(nullable = false, updatable = false)
+    @CreatedDate
+    private LocalDateTime accountCreated;
 }

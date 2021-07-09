@@ -3,6 +3,7 @@ package com.trotfl.trotflwebapp.service.springdatajpa;
 import com.trotfl.trotflwebapp.domain.security.User;
 import com.trotfl.trotflwebapp.repository.security.UserRepository;
 import com.trotfl.trotflwebapp.service.UserService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +17,6 @@ public class JpaUserService implements UserService {
     public JpaUserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
 
     @Override
     public User findById(Long id) {
@@ -36,5 +36,11 @@ public class JpaUserService implements UserService {
     @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() ->
+                new UsernameNotFoundException("User name: " + username + " not found"));
     }
 }
