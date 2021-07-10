@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -47,6 +48,26 @@ public class AccountController {
         }
     }
 
+    @GetMapping("/update/{form}")
+    public String initUpdateForm(Model model, Authentication authentication, @PathVariable String form) {
+        User user = userService.findByUsername(authentication.getName());
+        model
+                .addAttribute("user", user)
+                .addAttribute("form", form);
+        return "account/update";
+    }
+
+    @PostMapping("/update")
+    public String processUpdateForm(@Valid User user, BindingResult result) {
+        if (result.hasErrors()) {
+            return "account/update";
+        } else {
+            //TODO update password
+            //TODO update email
+//            userService.save(user);
+            return "redirect:/account/accountManagement";
+        }
+    }
     @RequestMapping("/login")
     public String login() {
         return "account/login";
