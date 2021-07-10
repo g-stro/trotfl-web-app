@@ -2,6 +2,7 @@ package com.trotfl.trotflwebapp.controller;
 
 import com.trotfl.trotflwebapp.domain.security.User;
 import com.trotfl.trotflwebapp.service.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,8 +25,8 @@ public class AccountController {
     }
 
     @GetMapping("/accountManagement")
-    public String userAccount(Model model) {
-        User user = userService.findByUsername("admin");
+    public String findUser(Model model, Authentication authentication) {
+        User user = userService.findByUsername(authentication.getName());
         model.addAttribute("user", user);
         return "account/accountManagement";
     }
