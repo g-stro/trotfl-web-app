@@ -1,4 +1,4 @@
-package com.trotfl.trotflwebapp.controller;
+package com.trotfl.trotflwebapp.web.controller;
 
 import com.trotfl.trotflwebapp.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -18,6 +18,6 @@ public class IndexController {
 
     @RequestMapping({"", "/", "index", "index.html"})
     public String index() {
-        return "index.html";
+        return "index";
     }
 }

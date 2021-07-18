@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body})}">
+<head>
+  <meta charset="UTF-8">
+  <title>My account</title>
+</head>
+<body>
+<div class="container">
+  <div class="d-flex justify-content-center my-3">
+    <div class="row" sec:authorize="isAuthenticated()">
+      <div class="col-md-12">
+        <h2 th:text="'Welcome to your account, ' + ${#authentication?.principal?.username}"></h2>
+      </div>
+    </div>
+  </div>
+  <div class="table-container m-3" th:object="${user}">
+    <table class="table table-sm table-dark">
+      <tbody>
+        <tr>
+          <th scope="row" style="width:33%;">Email address</th>
+          <td th:text="*{email}"></td>
+        </tr>
+        <tr>
+          <th scope="row">Account created</th>
+          <td th:text="*{#temporals.format(accountCreated, 'dd-MM-yyyy HH:mm')}"></td>
+        </tr>
+        <tr>
+          <th scope="row">Last login</th>
+          <td th:text="*{#temporals.format(lastLogin, 'dd-MM-yyyy HH:mm')}"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <a class="btn btn-dark" href="/account/update/password">Update password</a>
+        </div>
+        <div class="col-sm d-flex justify-content-center">
+          <a class="btn btn-dark" href="/account/update/email">Update email</a>
+        </div>
+        <div class="col-sm">
+<!--              <a class="btn btn-dark" href="#">...</a>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
