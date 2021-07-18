@@ -1,4 +1,4 @@
-package com.trotfl.trotflwebapp.controller;
+package com.trotfl.trotflwebapp.web.controller;
 
 import com.trotfl.trotflwebapp.domain.security.User;
 import com.trotfl.trotflwebapp.service.UserService;

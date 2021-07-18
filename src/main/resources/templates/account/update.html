@@ -13,7 +13,7 @@
       <label><h2 th:text="'Update ' + ${form}"></h2></label>
     </div>
     <!-- Update Password -->
-    <form th:if="${form == 'password'}" th:object="${user}" th:action="@{/account/update}"  method="post">
+    <form th:if="${form == 'password'}" th:object="${user}" th:action="@{/account/update/password}"  method="post">
       <input type="hidden" th:field="*{id}"/>
       <div class="form-group">
         <label for="currentPassword">Current password</label>
@@ -30,7 +30,7 @@
       </div>
     </form>
     <!-- Update email -->
-    <form th:if="${form == 'email'}" th:object="${user}" th:action="@{/account/update}"  method="post">
+    <form th:if="${form == 'email'}" th:object="${user}" th:action="@{/account/update/email}"  method="post">
       <div class="form-group">
         <label for="email">New email</label>
         <input type="email" class="form-control" id="email" name="email"

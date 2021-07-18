@@ -1,13 +1,13 @@
-package com.trotfl.trotflwebapp.controller;
+package com.trotfl.trotflwebapp.web.controller;
 
 import com.trotfl.trotflwebapp.domain.security.User;
 import com.trotfl.trotflwebapp.service.UserService;
+import com.trotfl.trotflwebapp.web.dto.UserDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -48,23 +48,46 @@ public class AccountController {
         }
     }
 
-    @GetMapping("/update/{form}")
-    public String initUpdateForm(Model model, Authentication authentication, @PathVariable String form) {
-        User user = userService.findByUsername(authentication.getName());
+    @GetMapping("/update/password")
+    public String initUpdatePasswordForm(Model model) {
+        UserDto userDto = UserDto.builder().build();
         model
-                .addAttribute("user", user)
-                .addAttribute("form", form);
+                .addAttribute("form", "password")
+                .addAttribute("user", userDto);
         return "account/update";
     }
 
-    @PostMapping("/update")
-    public String processUpdateForm(@Valid User user, BindingResult result) {
+    @PostMapping("/update/password")
+    public String processUpdatePasswordForm(@Valid UserDto userDto, Authentication authentication, BindingResult result) {
         if (result.hasErrors()) {
-            return "account/update";
+            return "account/update/password";
         } else {
-            //TODO update password
-            //TODO update email
-//            userService.save(user);
+            User user = userService.findByUsername(authentication.getName());
+            if (userService.checkPasswordsMatch(user, userDto.getPassword())) {
+                userService.updatePassword(user, userDto.getNewPassword());
+            }
+            return "redirect:/account/accountManagement";
+        }
+    }
+
+    @GetMapping("/update/email")
+    public String initUpdateEmailForm(Model model) {
+        UserDto userDto = UserDto.builder().build();
+        model
+                .addAttribute("form", "email")
+                .addAttribute("user", userDto);
+        return "account/update";
+    }
+
+    @PostMapping("/update/email")
+    public String processUpdateEmailForm(@Valid UserDto userDto, Authentication authentication, BindingResult result) {
+        if (result.hasErrors()) {
+            return "account/update/email";
+        } else {
+            User user = userService.findByUsername(authentication.getName());
+            if (userService.checkPasswordsMatch(user, userDto.getPassword())) {
+                userService.updateEmail(user, userDto.getEmail());
+            }
             return "redirect:/account/accountManagement";
         }
     }
