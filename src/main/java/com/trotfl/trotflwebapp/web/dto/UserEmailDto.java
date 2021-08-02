@@ -1,6 +1,10 @@
 package com.trotfl.trotflwebapp.web.dto;
 
+import com.trotfl.trotflwebapp.validation.ValidPassword;
 import lombok.*;
+
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author Greg Stroud
  */
@@ -9,10 +13,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDto {
+public class UserEmailDto {
 
-    private Long id;
+    @NotBlank
     private String email;
+
+    @ValidPassword
     private String password;
-    private String newPassword;
 }

@@ -14,16 +14,34 @@
     </div>
     <!-- Update Password -->
     <form th:if="${form == 'password'}" th:object="${user}" th:action="@{/account/update/password}"  method="post">
-      <input type="hidden" th:field="*{id}"/>
-      <div class="form-group">
-        <label for="currentPassword">Current password</label>
-        <input type="password" class="form-control" id="currentPassword" name="password"
-               placeholder="Enter password" autocomplete="new-password">
+
+      <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+        <span>Please correct errors</span>
       </div>
-      <div class="form-group">
-        <label for="newPassword">New password</label>
-        <input type="password" class="form-control" id="newPassword" name="newPassword"
+
+      <div class="form-group" th:class="${#fields.hasErrors('password')} ? 'form-group has-error' : 'form-group'">
+        <label>Current password</label>
+        <input type="password" class="form-control" th:field="*{password}" th:errorClass="has-error"
+               placeholder="Enter password" autocomplete="new-password">
+        <span class="help-block text-danger" th:if="${#fields.hasErrors('password')}">
+          <ul>
+            <div th:each="err : ${#fields.errors('password')}">
+              <li th:each="msg : ${err.split(',')}" th:text="${msg}">
+            </div>
+          </ul>
+        </span>
+      </div>
+      <div class="form-group" th:class="${#fields.hasErrors('newPassword')} ? 'form-group has-error' : 'form-group'">
+        <label>New password</label>
+        <input type="password" class="form-control" th:field="*{newPassword}" th:errorClass="has-error"
                placeholder="Enter new password" autocomplete="new-password">
+        <span class="help-block text-danger" th:if="${#fields.hasErrors('newPassword')}">
+          <ul>
+            <div th:each="err : ${#fields.errors('password')}">
+              <li th:each="msg : ${err.split(',')}" th:text="${msg}">
+            </div>
+          </ul>
+        </span>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-dark">Submit</button>
@@ -31,15 +49,32 @@
     </form>
     <!-- Update email -->
     <form th:if="${form == 'email'}" th:object="${user}" th:action="@{/account/update/email}"  method="post">
-      <div class="form-group">
-        <label for="email">New email</label>
-        <input type="email" class="form-control" id="email" name="email"
-               placeholder="Enter new email" autocomplete="off">
+
+      <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+        <span>Please correct errors</span>
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password"
+
+      <div class="form-group" th:class="${#fields.hasErrors('email')} ? 'form-group has-error' : 'form-group'">
+        <label>New email</label>
+        <input type="email" class="form-control" th:field="*{email}" th:errorClass="has-error"
+               placeholder="Enter new email" autocomplete="off">
+        <span class="help-block text-danger" th:if="${#fields.hasErrors('email')}">
+          <ul>
+            <li th:each="err : ${#fields.errors('email')}" th:text="${err}">
+          </ul>
+        </span>
+      </div>
+      <div class="form-group" th:class="${#fields.hasErrors('password')} ? 'form-group has-error' : 'form-group'">
+        <label>Password</label>
+        <input type="password" class="form-control" th:field="*{password}" th:errorClass="has-error"
                placeholder="Enter password" autocomplete="new-password">
+        <span class="help-block text-danger" th:if="${#fields.hasErrors('password')}">
+          <ul>
+            <div th:each="err : ${#fields.errors('password')}">
+              <li th:each="msg : ${err.split(',')}" th:text="${msg}">
+            </div>
+          </ul>
+        </span>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-dark">Submit</button>
