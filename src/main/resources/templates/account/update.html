@@ -56,7 +56,7 @@
 
       <div class="form-group" th:class="${#fields.hasErrors('email')} ? 'form-group has-error' : 'form-group'">
         <label>New email</label>
-        <input type="email" class="form-control" th:field="*{email}" th:errorClass="has-error"
+        <input type="text" class="form-control" th:field="*{email}" th:errorClass="has-error"
                placeholder="Enter new email" autocomplete="off">
         <span class="help-block text-danger" th:if="${#fields.hasErrors('email')}">
           <ul>

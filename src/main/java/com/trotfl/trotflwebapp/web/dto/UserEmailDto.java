@@ -3,6 +3,7 @@ package com.trotfl.trotflwebapp.web.dto;
 import com.trotfl.trotflwebapp.validation.ValidPassword;
 import lombok.*;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public class UserEmailDto {
 
+    @Email(message = "Must be a valid email address.")
     @NotBlank
     private String email;
 
